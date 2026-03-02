@@ -1,0 +1,26 @@
+[
+  {
+    "category": "Main Course - Veg",
+    "items": [
+      {
+        "name": "Paneer Butter Masala (Full)",
+        "description": "Soft paneer cubes in creamy tomato gravy.",
+        "price": 329,
+        "veg": true,
+        "image": "paneer-butter-masala-full.jpg"
+      }
+    ]
+  },
+  {
+    "category": "Main Course - Non Veg",
+    "items": [
+      {
+        "name": "Butter Chicken (Full)",
+        "description": "Rich creamy tomato gravy with tender chicken.",
+        "price": 349,
+        "veg": false,
+        "image": "butter-chicken-full.jpg"
+      }
+    ]
+  }
+]
