@@ -93,7 +93,7 @@
   {
     "category": "Beverages",
     "items": [
-      { "name": "Coca Cola (250ml)", "description": "Chilled Coca Cola soft drink.", "price": 30, "veg": true, "image": "coca-cola.jpg" },
+      { "name": "Coca Cola (250ml)", "description": "Chilled Coca Cola soft drink.", "price": 30, "veg": true, "image": "coca-cola.jpg" }
           ]
   }
 ]
