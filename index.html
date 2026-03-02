@@ -4,38 +4,54 @@
   <meta charset="UTF-8">
   <title>Delhi Tadka Co. | Direct Order</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="favicon/favicon.ico">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon/favicon.png">
 </head>
+
 <body>
 
-<div class="announcement">
-  🔥 Flat <span id="discountPercent">20</span>% OFF on Direct Orders
-</div>
-
-<header>
-  <img src="logo/logo.png" class="logo">
-  <h1>Delhi Tadka Co.</h1>
-  <p>Karahi • Makhani • Tawa Classics</p>
-  <a href="tel:+918860432553" class="call-btn">📞 Call Now</a>
-</header>
-
-<section id="menu"></section>
-
-<div class="cart-button" onclick="openCart()">
-  🛒 Cart (<span id="cartCount">0</span>)
-</div>
-
-<div id="cartModal" class="cart-modal">
-  <div class="cart-content">
-    <h2>Your Order</h2>
-    <div id="cartItems"></div>
-    <div id="cartTotal"></div>
-    <button onclick="checkout()">Order on WhatsApp</button>
-    <button onclick="closeCart()">Close</button>
+  <!-- 🔥 Announcement Bar -->
+  <div class="announcement">
+    🔥 Flat <span id="discountPercent">20</span>% OFF on Direct Orders
   </div>
-</div>
 
-<script src="js/script.js"></script>
+  <!-- 🏷 Header -->
+  <header>
+    <img src="logo/logo.png" class="logo" alt="Delhi Tadka Co Logo">
+    <h1>Delhi Tadka Co.</h1>
+    <p>Karahi • Makhani • Tawa Classics</p>
+
+    <a href="tel:+918860432553" class="call-btn">
+      📞 Call Now
+    </a>
+  </header>
+
+  <!-- 🍽 MENU SECTION (Auto Loaded From JSON) -->
+  <main id="menu"></main>
+
+  <!-- 🛒 Floating Cart Button -->
+  <div class="cart-button" onclick="openCart()">
+    🛒 Cart (<span id="cartCount">0</span>)
+  </div>
+
+  <!-- 🧾 Cart Modal -->
+  <div id="cartModal" class="cart-modal">
+    <div class="cart-content">
+      <h2>Your Order</h2>
+      <div id="cartItems"></div>
+      <div id="cartTotal"></div>
+
+      <button onclick="checkout()">Order on WhatsApp</button>
+      <button onclick="closeCart()">Close</button>
+    </div>
+  </div>
+
+  <!-- JS (Must Be At Bottom) -->
+  <script src="js/script.js"></script>
+
 </body>
 </html>
