@@ -87,17 +87,17 @@
       { "name": "Paratha", "description": "Layered whole wheat paratha.", "price": 49, "veg": true, "image": "paratha.jpg" },
       { "name": "Garlic Paratha", "description": "Paratha infused with garlic and herbs.", "price": 69, "veg": true, "image": "garlic-paratha.jpg" },
       { "name": "Laccha Paratha", "description": "Flaky layered North Indian bread.", "price": 69, "veg": true, "image": "laccha-paratha.jpg" },
-      { "name": "Malabar Paratha", "description": "Kerala style layered paratha.", "price": 69, "veg": true, "image": "malabar-paratha.jpg" }
-      { "name": "Egg Paratha", "description": "Classic Egg Paratha.", "price": 129, "veg": true, "image": "egg-paratha.jpg" }
+      { "name": "Malabar Paratha", "description": "Kerala style layered paratha.", "price": 69, "veg": true, "image": "malabar-paratha.jpg" },
+      { "name": "Egg Paratha", "description": "Classic Egg Paratha.", "price": 129, "veg": false, "image": "egg-paratha.jpg" }
     ]
   },
   {
     "category": "Pizza",
     "items": [
-      { "name": "Classic Cheese Pizza", "description": "Cheese Pizza 8 inches, serves 1-2.", "price": 329, "veg": true, "image": "cheese-pizza.jpg" },
-      { "name": "Onion Capsicum Pizza", "description": "Classic onion and capsicum toppings, 8 inches, serves 1-2.", "price": 349, "veg": true, "image": "onion-capsicum-pizza.jpg" },
-      { "name": "Veg Loaded Pizza", "description": "Lots of veg toppings, 8 inches, serves 1-2.", "price": 399, "veg": true, "image": "veg-pizza.jpg" },
-      { "name": "Paneer Tikka Pizza", "description": "Paneer Tikka along with spices, 8 inches, serves 1-2.", "price": 449, "veg": true, "image": "paneer-pizza.jpg" },
+      { "name": "Classic Cheese Pizza", "description": "Cheese Pizza 8 inches serves 1-2.", "price": 329, "veg": true, "image": "cheese-pizza.jpg" },
+      { "name": "Onion Capsicum Pizza", "description": "Classic onion and capsicum toppings 8 inches serves 1-2.", "price": 349, "veg": true, "image": "onion-capsicum-pizza.jpg" },
+      { "name": "Veg Loaded Pizza", "description": "Lots of veg toppings 8 inches serves 1-2.", "price": 399, "veg": true, "image": "veg-pizza.jpg" },
+      { "name": "Paneer Tikka Pizza", "description": "Paneer Tikka along with spices 8 inches serves 1-2.", "price": 449, "veg": true, "image": "paneer-pizza.jpg" }
      ]
   },
   {
