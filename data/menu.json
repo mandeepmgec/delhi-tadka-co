@@ -75,20 +75,30 @@
   {
     "category": "Rice",
     "items": [
-      { "name": "Plain Rice", "description": "Steamed premium basmati rice.", "price": 99, "veg": true, "image": "plain-rice.jpg" },
-      { "name": "Jeera Rice", "description": "Basmati rice tempered with roasted cumin.", "price": 129, "veg": true, "image": "jeera-rice.jpg" }
+      { "name": "Plain Rice", "description": "Steamed premium basmati rice.", "price": 129, "veg": true, "image": "plain-rice.jpg" },
+      { "name": "Jeera Rice", "description": "Basmati rice tempered with roasted cumin.", "price": 149, "veg": true, "image": "jeera-rice.jpg" }
     ]
   },
   {
     "category": "Breads",
     "items": [
-      { "name": "Tawa Roti", "description": "Whole wheat roti.", "price": 10, "veg": true, "image": "tawa-roti.jpg" },
-      { "name": "Butter Tawa Roti", "description": "Whole wheat roti with butter.", "price": 15, "veg": true, "image": "butter-tawa-roti.jpg" },
-      { "name": "Paratha", "description": "Layered whole wheat paratha.", "price": 39, "veg": true, "image": "paratha.jpg" },
-      { "name": "Garlic Paratha", "description": "Paratha infused with garlic and herbs.", "price": 49, "veg": true, "image": "garlic-paratha.jpg" },
-      { "name": "Laccha Paratha", "description": "Flaky layered North Indian bread.", "price": 49, "veg": true, "image": "laccha-paratha.jpg" },
-      { "name": "Malabar Paratha", "description": "Kerala style layered paratha.", "price": 59, "veg": true, "image": "malabar-paratha.jpg" }
+      { "name": "Tawa Roti", "description": "Whole wheat roti.", "price": 19, "veg": true, "image": "tawa-roti.jpg" },
+      { "name": "Butter Tawa Roti", "description": "Whole wheat roti with butter.", "price": 29, "veg": true, "image": "butter-tawa-roti.jpg" },
+      { "name": "Paratha", "description": "Layered whole wheat paratha.", "price": 49, "veg": true, "image": "paratha.jpg" },
+      { "name": "Garlic Paratha", "description": "Paratha infused with garlic and herbs.", "price": 69, "veg": true, "image": "garlic-paratha.jpg" },
+      { "name": "Laccha Paratha", "description": "Flaky layered North Indian bread.", "price": 69, "veg": true, "image": "laccha-paratha.jpg" },
+      { "name": "Malabar Paratha", "description": "Kerala style layered paratha.", "price": 69, "veg": true, "image": "malabar-paratha.jpg" }
+      { "name": "Egg Paratha", "description": "Classic Egg Paratha.", "price": 129, "veg": true, "image": "egg-paratha.jpg" }
     ]
+  },
+  {
+    "category": "Pizza",
+    "items": [
+      { "name": "Classic Cheese Pizza", "description": "Cheese Pizza 8 inches, serves 1-2.", "price": 329, "veg": true, "image": "cheese-pizza.jpg" },
+      { "name": "Onion Capsicum Pizza", "description": "Classic onion and capsicum toppings, 8 inches, serves 1-2.", "price": 349, "veg": true, "image": "onion-capsicum-pizza.jpg" },
+      { "name": "Veg Loaded Pizza", "description": "Lots of veg toppings, 8 inches, serves 1-2.", "price": 399, "veg": true, "image": "veg-pizza.jpg" },
+      { "name": "Paneer Tikka Pizza", "description": "Paneer Tikka along with spices, 8 inches, serves 1-2.", "price": 449, "veg": true, "image": "paneer-pizza.jpg" },
+     ]
   },
   {
     "category": "Beverages",
