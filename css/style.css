@@ -41,8 +41,8 @@ header {
 }
 
 .logo {
-  width: 90px;
-  height: 90px;
+  width: 140px;
+  height: 140px;
   object-fit: contain;
   border-radius: 50%;
   border: 3px solid var(--border);
@@ -211,6 +211,45 @@ main#menu {
 .add-btn:hover {
   background: var(--red);
   color: white;
+}
+
+/* Inline qty stepper on menu card */
+.inline-qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border: 2px solid var(--red);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.inline-qty .qty-btn {
+  background: var(--red);
+  color: white;
+  border: none;
+  border-radius: 0;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.inline-qty .qty-btn:hover { background: var(--red-dark); }
+.inline-qty .qty-num {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--red);
+  min-width: 30px;
+  text-align: center;
+  background: white;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Item Image */
@@ -408,4 +447,31 @@ main#menu {
     border-radius: 20px;
     animation: none;
   }
+}
+
+/* Address modal */
+.address-content {
+  max-height: none;
+}
+.address-hint {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.address-input {
+  width: 100%;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  resize: none;
+  margin-bottom: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.address-input:focus {
+  border-color: var(--red);
 }
