@@ -23,12 +23,12 @@
     <a href="tel:+918860432553" class="call-btn">📞 Call Now</a>
   </header>
 
-  <!-- Category nav is injected here by JS -->
+  <!-- Category nav injected by JS -->
 
-  <!-- Menu (Auto Loaded From JSON) -->
+  <!-- Menu -->
   <main id="menu"></main>
 
-  <!-- Floating Cart Button -->
+  <!-- Floating Cart -->
   <div class="cart-button" onclick="openCart()">
     🛒 Cart (<span id="cartCount">0</span>)
   </div>
@@ -43,7 +43,23 @@
       <div id="cartItems"></div>
       <div id="cartTotal"></div>
       <button class="whatsapp-btn" onclick="checkout()" disabled>
-        📲 Order on WhatsApp
+        📲 Proceed to Order
+      </button>
+    </div>
+  </div>
+
+  <!-- Address Modal -->
+  <div id="addressModal" class="cart-modal">
+    <div class="cart-content address-content">
+      <div class="cart-header">
+        <h2>Delivery Address</h2>
+        <button class="close-btn" onclick="closeAddressModal()">✕</button>
+      </div>
+      <p class="address-hint">We'll include your address in the WhatsApp order message.</p>
+      <textarea id="addressInput" class="address-input" rows="4"
+        placeholder="House no., street, area, landmark..."></textarea>
+      <button class="whatsapp-btn" onclick="confirmOrder()">
+        📲 Send Order on WhatsApp
       </button>
     </div>
   </div>
