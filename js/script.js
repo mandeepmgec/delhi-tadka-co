@@ -1,7 +1,7 @@
 const DISCOUNT_PERCENT = 20;
 const PHONE_NUMBER = "918860432553";
 
-// cart is a map: itemName -> { name, price, qty }
+// cart: itemName -> { name, price, qty }
 let cart = {};
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
       renderCategoryNav(data);
       renderMenu(data);
     });
+
+  document.getElementById("cartModal").addEventListener("click", function(e) {
+    if (e.target === this) closeCart();
+  });
 });
 
 function calculateDiscount(price) {
@@ -49,7 +53,8 @@ function renderMenu(menuData) {
     category.items.forEach(item => {
       const finalPrice = calculateDiscount(item.price);
       const dot = item.veg ? "🟢" : "🔴";
-      const itemKey = item.name;
+      // safe key for DOM id: replace spaces & special chars
+      const safeId = "item-" + item.name.replace(/[^a-zA-Z0-9]/g, "_");
 
       const div = document.createElement("div");
       div.className = "menu-item";
@@ -65,9 +70,9 @@ function renderMenu(menuData) {
           <h3>${dot} ${item.name}</h3>
           <p>${item.description}</p>
           <div class="price-row">${discountHTML}</div>
-          <button class="add-btn" onclick="addToCart('${itemKey.replace(/'/g, "\\'")}', ${finalPrice})">
-            + Add
-          </button>
+          <div class="item-cart-control" id="${safeId}">
+            <button class="add-btn" onclick="addToCart('${item.name.replace(/'/g, "\\'")}', ${finalPrice}, '${safeId}')">+ Add</button>
+          </div>
         </div>
         <div class="item-image">
           <img src="images/${item.image}" alt="${item.name}" loading="lazy">
@@ -81,27 +86,68 @@ function renderMenu(menuData) {
   });
 }
 
-function addToCart(name, price) {
+// Switch the item's Add button to inline qty controls
+function addToCart(name, price, safeId) {
   if (cart[name]) {
     cart[name].qty += 1;
   } else {
-    cart[name] = { name, price, qty: 1 };
+    cart[name] = { name, price, qty: 1, safeId };
   }
   updateCartCount();
+  refreshItemControl(name);
 }
 
-function changeQty(name, delta) {
+function changeQtyInline(name, delta) {
   if (!cart[name]) return;
   cart[name].qty += delta;
   if (cart[name].qty <= 0) {
     delete cart[name];
   }
   updateCartCount();
-  renderCart();
+  refreshItemControl(name);
+  // Also refresh cart modal if open
+  if (document.getElementById("cartModal").style.display === "block") {
+    renderCart();
+  }
+}
+
+// Re-renders the per-item control (Add button ↔ qty stepper)
+function refreshItemControl(name) {
+  const item = cart[name];
+  const safeId = item ? item.safeId : (
+    // find it by scanning all controls
+    (() => {
+      const all = document.querySelectorAll(".item-cart-control");
+      for (const el of all) {
+        if (el.dataset.name === name) return el.id;
+      }
+    })()
+  );
+
+  if (!safeId) return;
+  const ctrl = document.getElementById(safeId);
+  if (!ctrl) return;
+
+  // tag it so we can find it even after remove
+  ctrl.dataset.name = name;
+
+  if (!item || item.qty === 0) {
+    const price = ctrl.dataset.price;
+    ctrl.innerHTML = `<button class="add-btn" onclick="addToCart('${name.replace(/'/g, "\\'")}', ${price}, '${safeId}')">+ Add</button>`;
+  } else {
+    ctrl.dataset.price = item.price;
+    ctrl.innerHTML = `
+      <div class="inline-qty">
+        <button class="qty-btn" onclick="changeQtyInline('${name.replace(/'/g, "\\'")}', -1)">−</button>
+        <span class="qty-num">${item.qty}</span>
+        <button class="qty-btn" onclick="changeQtyInline('${name.replace(/'/g, "\\'")}', 1)">+</button>
+      </div>
+    `;
+  }
 }
 
 function updateCartCount() {
-  const total = Object.values(cart).reduce((sum, item) => sum + item.qty, 0);
+  const total = Object.values(cart).reduce((sum, i) => sum + i.qty, 0);
   document.getElementById("cartCount").innerText = total;
 }
 
@@ -113,13 +159,6 @@ function openCart() {
 function closeCart() {
   document.getElementById("cartModal").style.display = "none";
 }
-
-// Close modal when clicking backdrop
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("cartModal").addEventListener("click", function(e) {
-    if (e.target === this) closeCart();
-  });
-});
 
 function renderCart() {
   const cartItems = document.getElementById("cartItems");
@@ -146,9 +185,9 @@ function renderCart() {
     row.innerHTML = `
       <div class="cart-row-name">${item.name}</div>
       <div class="qty-controls">
-        <button class="qty-btn" onclick="changeQty('${item.name.replace(/'/g, "\\'")}', -1)">−</button>
+        <button class="qty-btn" onclick="changeQtyInModal('${item.name.replace(/'/g, "\\'")}', -1)">−</button>
         <span class="qty-num">${item.qty}</span>
-        <button class="qty-btn" onclick="changeQty('${item.name.replace(/'/g, "\\'")}', 1)">+</button>
+        <button class="qty-btn" onclick="changeQtyInModal('${item.name.replace(/'/g, "\\'")}', 1)">+</button>
       </div>
       <div class="cart-row-price">₹${subtotal}</div>
     `;
@@ -158,24 +197,59 @@ function renderCart() {
   cartTotal.innerHTML = `<strong>Total: ₹${total}</strong>`;
 }
 
+function changeQtyInModal(name, delta) {
+  changeQtyInline(name, delta);
+  renderCart();
+}
+
+// ── Checkout: show address modal first ──
 function checkout() {
   const items = Object.values(cart);
   if (items.length === 0) return;
+  closeCart();
+  document.getElementById("addressModal").style.display = "block";
+  document.getElementById("addressInput").focus();
+}
 
-  let message = "Hi Delhi Tadka Co,%0A%0AI want to order:%0A";
+function confirmOrder() {
+  const address = document.getElementById("addressInput").value.trim();
+  if (!address) {
+    document.getElementById("addressInput").style.borderColor = "#c62828";
+    document.getElementById("addressInput").placeholder = "Please enter your delivery address";
+    return;
+  }
+
+  const items = Object.values(cart);
+  let message = "Hi Delhi Tadka Co,%0A%0A*My Order:*%0A";
   let total = 0;
 
   items.forEach(item => {
     const subtotal = item.price * item.qty;
-    message += `${item.qty}x ${item.name} - ₹${subtotal}%0A`;
+    message += `${item.qty}x ${item.name} - %E2%82%B9${subtotal}%0A`;
     total += subtotal;
   });
 
-  message += `%0ATotal: ₹${total}%0A%0ADelivery Address:%0A`;
+  message += `%0A*Total: %E2%82%B9${total}*%0A%0A*Delivery Address:*%0A${encodeURIComponent(address)}`;
 
   window.open(`https://wa.me/${PHONE_NUMBER}?text=${message}`, "_blank");
 
   cart = {};
   updateCartCount();
-  closeCart();
+  // Reset all inline controls back to Add button
+  document.querySelectorAll(".item-cart-control").forEach(ctrl => {
+    const name = ctrl.dataset.name;
+    if (name) {
+      const price = ctrl.dataset.price;
+      const safeId = ctrl.id;
+      ctrl.innerHTML = `<button class="add-btn" onclick="addToCart('${name.replace(/'/g, "\\'")}', ${price}, '${safeId}')">+ Add</button>`;
+    }
+  });
+
+  closeAddressModal();
+}
+
+function closeAddressModal() {
+  document.getElementById("addressModal").style.display = "none";
+  document.getElementById("addressInput").value = "";
+  document.getElementById("addressInput").style.borderColor = "";
 }
